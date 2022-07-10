@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import {Component} from "react";
 import './App.css';
+import Home from "./menu/componnent/home";
+import Menu from "./menu/componnent/menu";
+import { BrowserRouter as Router, 
+  Routes , 
+  Route,
+ } from 'react-router-dom';
+import ItemDetailsWithRouter from "./items/componnent/item-details";
+import NotDefindeMenuChild from './menu/componnent/not-definde-menu-child';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+
+  render(){  
+    return (
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route path='/' element={<Menu />} key="menu" children={[
+              <Route path='/' element={<Home/>} key="home"/> , 
+              <Route path='/itemDetailse/:id' element={<ItemDetailsWithRouter /> } key="itemDetailse"/>,
+              <Route path="/notDefindeMenuChild" element={<NotDefindeMenuChild /> } key="notDefindeMenuChild"/>
+            ]} />
+          </Routes>
+       </Router>      
+      </div>
+    );
+  }
 }
 
 export default App;
